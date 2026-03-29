@@ -1,9 +1,15 @@
-from flask import Flask, request, redirect, send_from_directory, jsonify
+from flask import Flask, request, redirect, send_from_directory, jsonify, session, url_for
+from functools import wraps
 from werkzeug.utils import secure_filename
 import os
 import json
 
 app = Flask(__name__)
+app.secret_key = 'your-secret-key-here'
+
+# Credenciales simples y seguras (ajustar en entorno real)
+ADMIN_USER = 'admin'
+ADMIN_PASSWORD = 'password123'
 
 # Configuración para carga de archivos
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
@@ -37,7 +43,37 @@ def home():
 def static_files(path):
     return send_from_directory('.', path)
 
+def login_required(f):
+    @wraps(f)
+    def wrapped(*args, **kwargs):
+        if not session.get('logged_in'):
+            return redirect(url_for('login', next=request.path))
+        return f(*args, **kwargs)
+    return wrapped
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        if username == ADMIN_USER and password == ADMIN_PASSWORD:
+            session['logged_in'] = True
+            next_page = request.args.get('next') or url_for('admin')
+            return redirect(next_page)
+        return "Usuario o contraseña incorrectos", 401
+    return send_from_directory('.', 'login.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    return redirect(url_for('home'))
+
+@app.route('/crear-blog')
+def crear_blog():
+    return redirect(url_for('login', next=url_for('admin')))
+
 @app.route('/admin')
+@login_required
 def admin():
     return send_from_directory('.', 'admin.html')
 
@@ -59,6 +95,7 @@ def api_posts():
     return jsonify({'posts': posts_data})
 
 @app.route('/add_post', methods=['POST'])
+@login_required
 def add_post():
     title = request.form['title']
     content = request.form['content']
