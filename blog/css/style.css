@@ -21,6 +21,7 @@ nav a {
 
 main {
     padding: 2rem;
+    padding-bottom: 6rem; /* Añadido para evitar que el footer fijo tape el contenido */
 }
 
 footer {
