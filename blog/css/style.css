@@ -78,3 +78,32 @@ footer {
 .post-card a:hover {
     color: #E1BEE7;
 }
+
+#scroll-slider-container {
+    position: fixed;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid #D1C4E9;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    padding: 0.6rem;
+    z-index: 999;
+    text-align: center;
+    width: 3.4rem;
+}
+
+#scroll-slider-label {
+    font-size: 0.68rem;
+    margin-bottom: 0.4rem;
+    color: #6A1B9A;
+}
+
+#scroll-slider {
+    writing-mode: bt-lr; /* vertical slider */
+    -webkit-appearance: slider-vertical;
+    width: 0.8rem;
+    height: 180px;
+    margin: 0;
+}
