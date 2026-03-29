@@ -98,6 +98,7 @@ def api_posts():
 @login_required
 def add_post():
     title = request.form['title']
+    summary = request.form['summary']
     content = request.form['content']
     post_slug = title.lower().replace(' ', '-')
     filename = post_slug + '.html'
@@ -127,7 +128,8 @@ def add_post():
     metadata = load_posts_metadata()
     metadata[post_slug] = {
         'title': title,
-        'cover': 'assets/' + os.path.basename(cover_path) if cover_path else None
+        'cover': 'assets/' + os.path.basename(cover_path) if cover_path else None,
+        'summary': summary
     }
     save_posts_metadata(metadata)
     
@@ -152,6 +154,7 @@ def add_post():
     <main>
         <article>
             <h2>{title}</h2>
+            <p><em>{summary}</em></p>
             {image_html}
             <p>{content}</p>
         </article>

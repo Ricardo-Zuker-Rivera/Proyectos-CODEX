@@ -13,8 +13,8 @@
             <a href="publicaciones.html">PUBLICACIONES</a>
             <a href="redes.html">REDES</a>
             <a href="conocenos.html">CONOCENOS</a>
-            <a href="/crear-blog">Crear Blog</a>
-            <a href="/logout">Logout</a>
+            <a href="/crear-blog">CREAR ENTRADA</a>
+            <a href="/logout">LOGOUT</a>
         </nav>
     </header>
     <main>
@@ -22,6 +22,8 @@
         <form action="/add_post" method="post" enctype="multipart/form-data">
             <label for="title">Title:</label><br>
             <input type="text" id="title" name="title" required><br><br>
+            <label for="summary">Resumen:</label><br>
+            <textarea id="summary" name="summary" rows="3" cols="50" required></textarea><br><br>
             <label for="content">Content:</label><br>
             <textarea id="content" name="content" rows="10" cols="50" required></textarea><br><br>
             <label for="cover">Cover Image (Portada):</label><br>
