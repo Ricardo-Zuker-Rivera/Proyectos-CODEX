@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - My Blog</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Admin Panel</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="publicaciones.html">PUBLICACIONES</a>
+            <a href="redes.html">REDES</a>
+            <a href="conocenos.html">CONOCENOS</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Add New Post</h2>
+        <form action="/add_post" method="post" enctype="multipart/form-data">
+            <label for="title">Title:</label><br>
+            <input type="text" id="title" name="title" required><br><br>
+            <label for="content">Content:</label><br>
+            <textarea id="content" name="content" rows="10" cols="50" required></textarea><br><br>
+            <label for="cover">Cover Image (Portada):</label><br>
+            <input type="file" id="cover" name="cover" accept="image/*" required><br><br>
+            <label for="image">Body Image:</label><br>
+            <input type="file" id="image" name="image" accept="image/*"><br><br>
+            <input type="submit" value="Add Post">
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2026 My Blog</p>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
